@@ -1,4 +1,4 @@
-import { ProviderHttpError, ProviderTimeoutError, type OpenAIClient } from './openaiClient.ts';
+import { ProviderHttpError, ProviderNotConfiguredError, ProviderTimeoutError, type OpenAIClient } from './openaiClient.ts';
 
 export interface GenerateReplyRequest {
   message: string;
@@ -74,6 +74,10 @@ export function createChatService(openAIClient: OpenAIClient): ChatService {
           }
 
           throw new ChatServiceError('provider_error', 502, error.message, request.requestId);
+        }
+
+        if (error instanceof ProviderNotConfiguredError) {
+          throw new ChatServiceError('provider_error', 503, error.message, request.requestId);
         }
 
         throw new ChatServiceError('provider_error', 502, 'provider request failed', request.requestId);

@@ -26,6 +26,8 @@ export class ProviderHttpError extends Error {
   }
 }
 
+export class ProviderNotConfiguredError extends Error {}
+
 export interface OpenAIClient {
   createChatCompletion(request: OpenAIChatCompletionRequest): Promise<OpenAIChatCompletionResponse>;
 }
@@ -39,17 +41,7 @@ export function createOpenAIClient(transport?: Transport): OpenAIClient {
         return transport(request);
       }
 
-      return {
-        id: `cmpl_${request.requestId}`,
-        choices: [
-          {
-            message: {
-              role: 'assistant',
-              content: `placeholder reply: ${request.message}`
-            }
-          }
-        ]
-      };
+      throw new ProviderNotConfiguredError('openai transport is not configured');
     }
   };
 }

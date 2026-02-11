@@ -5,6 +5,8 @@ import { handleChat } from '../src/routes/chat.ts';
 import { handleConversations } from '../src/routes/conversations.ts';
 import { handleMessages } from '../src/routes/messages.ts';
 import { handleFeedback } from '../src/routes/feedback.ts';
+import { createChatService } from '../src/services/chatService.ts';
+import { createOpenAIClient } from '../src/services/openaiClient.ts';
 
 function hasNormalizedErrorShape(body: unknown): body is { code: string; message: string; request_id: string } {
   if (!body || typeof body !== 'object') {
@@ -30,11 +32,23 @@ test('POST /v1/chat returns 400 normalized error when message is missing', async
   assert.equal((result.body as { code: string }).code, 'invalid_request');
 });
 
-test('POST /v1/chat returns 200 with placeholder success shape', async () => {
+test('POST /v1/chat returns 200 with success shape', async () => {
   const result = await handleChat({
     method: 'POST',
     headers: { 'x-client-id': 'client-1' },
     body: { message: 'hello' }
+  }, {
+    chatService: createChatService(createOpenAIClient(async () => ({
+      id: 'cmpl-contract-1',
+      choices: [
+        {
+          message: {
+            role: 'assistant',
+            content: 'contract response'
+          }
+        }
+      ]
+    })))
   });
 
   assert.equal(result.status, 200);

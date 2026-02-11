@@ -91,3 +91,20 @@ test('chat route forwards provider rate limit to normalized 429 error with reque
   assert.equal((response.body as { code: string }).code, 'rate_limit');
   assert.equal((response.body as { request_id: string }).request_id, REQUEST_ID);
 });
+
+test('chat route returns normalized 503 provider_error when transport is not configured', async () => {
+  const response = await handleChat({
+    method: 'POST',
+    headers: {
+      'x-client-id': 'client-1',
+      'x-request-id': REQUEST_ID
+    },
+    body: {
+      message: 'hello'
+    }
+  });
+
+  assert.equal(response.status, 503);
+  assert.equal((response.body as { code: string }).code, 'provider_error');
+  assert.equal((response.body as { request_id: string }).request_id, REQUEST_ID);
+});
