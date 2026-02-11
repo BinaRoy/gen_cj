@@ -26,6 +26,7 @@
 - 2026-02-11: moved `/tmp/gen_cangjie_main_full_listing.txt` to `docs/process/listings/gen_cangjie_main_full_listing.txt`.
 - 2026-02-11: implemented Task 3 OpenAI-backed chat service skeleton with request context middleware and route integration (`backend/src/services`, `backend/src/middlewares/requestContext.ts`, `backend/src/routes/chat.ts`).
 - 2026-02-11: finalized Task 3 on `main` via cherry-pick as `969f6a6` and follow-up fix `b903408` (conflict handled and resolved).
+- 2026-02-11: implemented Task 4 persistence layer with conversation/message repos and route/service integration (`backend/src/repos`, `backend/src/routes/conversations.ts`, `backend/src/routes/messages.ts`, `backend/src/services/chatService.ts`).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -53,6 +54,9 @@
 - 2026-02-11: Task 3 GREEN verification `npm test -- backend/test/chat.service.test.ts` passed after service/route implementation.
 - 2026-02-11: regression verification `npm test -- backend/test/routes.contract.test.ts` passed after chat route integration update.
 - 2026-02-11: reviewer re-verified on `main` with `npm test -- backend/test/chat.service.test.ts` and `npm test -- backend/test/routes.contract.test.ts` (both pass).
+- 2026-02-11: Task 4 RED verification `npm test -- backend/test/persistence.integration.test.ts` failed before repo implementation (`ERR_MODULE_NOT_FOUND`).
+- 2026-02-11: Task 4 GREEN verification `npm test -- backend/test/persistence.integration.test.ts` passed after D1/KV-style repo integration.
+- 2026-02-11: Task 4 regression verification passed with `npm test -- backend/test/chat.service.test.ts` and `npm test -- backend/test/routes.contract.test.ts`.
 
 ## Next Actions
 1. Start Task 4 execution in separate session using `executing-plans`.

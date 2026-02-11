@@ -1,3 +1,5 @@
+import { createConversationRepo, type ConversationRepo } from '../repos/conversationRepo.ts';
+import { createMessageRepo, type MessageRepo } from '../repos/messageRepo.ts';
 import { ProviderHttpError, ProviderNotConfiguredError, ProviderTimeoutError, type OpenAIClient } from './openaiClient.ts';
 
 export interface GenerateReplyRequest {
@@ -5,10 +7,13 @@ export interface GenerateReplyRequest {
   requestId: string;
   model?: string;
   temperature?: number;
+  clientId?: string;
+  conversationId?: string;
 }
 
 export interface GenerateReplyResponse {
   requestId: string;
+  conversationId: string;
   reply: {
     id: string;
     role: string;
@@ -33,7 +38,15 @@ export interface ChatService {
   generateReply(request: GenerateReplyRequest): Promise<GenerateReplyResponse>;
 }
 
-export function createChatService(openAIClient: OpenAIClient): ChatService {
+interface ChatServiceDeps {
+  conversationRepo?: ConversationRepo;
+  messageRepo?: MessageRepo;
+}
+
+export function createChatService(openAIClient: OpenAIClient, deps?: ChatServiceDeps): ChatService {
+  const conversationRepo = deps?.conversationRepo ?? createConversationRepo();
+  const messageRepo = deps?.messageRepo ?? createMessageRepo();
+
   return {
     async generateReply(request: GenerateReplyRequest): Promise<GenerateReplyResponse> {
       try {
@@ -51,8 +64,27 @@ export function createChatService(openAIClient: OpenAIClient): ChatService {
           );
         }
 
+        const conversation = resolveConversation(request, conversationRepo);
+
+        messageRepo.appendMessage({
+          id: `msg_user_${request.requestId}`,
+          conversationId: conversation.id,
+          role: 'user',
+          content: request.message
+        });
+
+        messageRepo.appendMessage({
+          id: completion.id,
+          conversationId: conversation.id,
+          role: 'assistant',
+          content
+        });
+
+        conversationRepo.touchConversation(conversation.id);
+
         return {
           requestId: request.requestId,
+          conversationId: conversation.id,
           reply: {
             id: completion.id,
             role,
@@ -84,4 +116,24 @@ export function createChatService(openAIClient: OpenAIClient): ChatService {
       }
     }
   };
+}
+
+function resolveConversation(request: GenerateReplyRequest, conversationRepo: ConversationRepo) {
+  if (request.conversationId) {
+    const existing = conversationRepo.getConversation(request.conversationId);
+    if (existing) {
+      return existing;
+    }
+
+    return conversationRepo.createConversation({
+      id: request.conversationId,
+      clientId: request.clientId ?? 'anonymous',
+      title: request.message.slice(0, 32)
+    });
+  }
+
+  return conversationRepo.createConversation({
+    clientId: request.clientId ?? 'anonymous',
+    title: request.message.slice(0, 32)
+  });
 }
