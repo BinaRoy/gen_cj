@@ -60,6 +60,23 @@ class ChatUseCaseTest {
     }
 
     @TestCase
+    func escapeQuoteAndBackslashInJsonPayload(): Unit {
+        let transport = RecordingTransport(plannedResponse: ApiResponse(
+            statusCode: 200,
+            requestId: "req1c",
+            conversationId: "conv-escape",
+            role: "assistant",
+            content: "ok",
+            message: ""
+        ))
+        let apiClient = ApiClient(baseUrl: "https://api.example.dev", transport: transport)
+        let useCase = ChatUseCase(apiClient: apiClient)
+
+        _ = useCase.sendMessage("client-escape", "x\"y\\z", "a\"b\\c")
+        @Expect(transport.lastRequest.body, "{\"message\":\"a\\\"b\\\\c\",\"conversation_id\":\"x\\\"y\\\\z\"}")
+    }
+
+    @TestCase
     func mapSuccessResponseToDomain(): Unit {
         let transport = RecordingTransport(plannedResponse: ApiResponse(
             statusCode: 200,
