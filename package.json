@@ -1,0 +1,12 @@
+{
+  "name": "gen_cangjie",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx --test"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}
