@@ -37,7 +37,7 @@
 
 ## Status Board
 - Task 1: pending
-- Task 2: pending
+- Task 2: completed (reviewed, cherry-picked to `main` as `9822c80`)
 - Task 3: pending
 - Task 4: pending
 - Task 5: pending
