@@ -17,6 +17,9 @@
 - No task may be marked done without test evidence and file-level change summary.
 - Active worktrees for this project must be created under repository root `.worktrees/`.
 - Do not create new project worktrees under `/tmp` going forward.
+- Existing `/tmp` worktrees have been migrated; active paths are:
+- `/.worktrees/task1-docs-bootstrap` (branch `task1/docs-bootstrap`)
+- `/.worktrees/task2-backend-contracts` (branch `task2/backend-contracts`)
 
 ## Sync Message Template (for every checkpoint)
 - Session ID:

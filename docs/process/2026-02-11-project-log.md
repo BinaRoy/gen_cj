@@ -22,6 +22,8 @@
 - 2026-02-11: committed Task 1 scaffolding docs (`5cf594d`).
 - 2026-02-11: archived Task 2 backend contracts/tests from worktree into main (`9822c80`).
 - 2026-02-11: moved Task 2 working path from `/tmp/gen_cangjie-task2` to `.worktrees/task2-backend-contracts` under repo root.
+- 2026-02-11: migrated Task 1 worktree from `/tmp/gen_cangjie-task1` to `.worktrees/task1-docs-bootstrap`.
+- 2026-02-11: moved `/tmp/gen_cangjie_main_full_listing.txt` to `docs/process/listings/gen_cangjie_main_full_listing.txt`.
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -44,6 +46,7 @@
 - 2026-02-11: verified Task 2 contract test in worktree with `npm test -- backend/test/routes.contract.test.ts` (pass).
 - 2026-02-11: cherry-picked Task 2 commit `0906e84` to main as `9822c80`.
 - 2026-02-11: verified worktree mapping: `task2/backend-contracts` -> `/home/gloria/Cangjie/gen_cangjie/.worktrees/task2-backend-contracts`.
+- 2026-02-11: verified all project worktrees are under repository `.worktrees/` and no `/tmp/gen_cangjie-*` entries remain.
 
 ## Next Actions
 1. Start Task 3 execution in separate session using `executing-plans`.
