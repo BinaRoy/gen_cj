@@ -29,9 +29,6 @@ export interface KVNamespace {
   put(key: string, value: string): void;
 }
 
-const defaultConversationStore = new Map<string, ConversationRecord>();
-const defaultConversationOrderByClient = new Map<string, string[]>();
-
 function toIso(now?: string): string {
   return now ?? new Date().toISOString();
 }
@@ -57,8 +54,8 @@ function ensureClientOrder(orderMap: Map<string, string[]>, clientId: string): s
 }
 
 export function createConversationRepo(_deps?: { d1?: D1Database; kv?: KVNamespace }): ConversationRepo {
-  const store = defaultConversationStore;
-  const orderByClient = defaultConversationOrderByClient;
+  const store = new Map<string, ConversationRecord>();
+  const orderByClient = new Map<string, string[]>();
 
   return {
     createConversation(input: { id?: string; clientId: string; title?: string; now?: string }): ConversationRecord {

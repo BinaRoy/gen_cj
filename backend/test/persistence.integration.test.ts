@@ -127,3 +127,28 @@ test('persistence: messages route supports pagination cursor', async () => {
   const page2Body = page2.body as { items: Array<{ id: string }> };
   assert.equal(page2Body.items.length, 2);
 });
+
+test('persistence: independent repo instances do not share in-memory state', () => {
+  const conversationRepoA = createConversationRepo();
+  const conversationRepoB = createConversationRepo();
+  const messageRepoA = createMessageRepo();
+  const messageRepoB = createMessageRepo();
+
+  conversationRepoA.createConversation({
+    id: 'conv-isolated',
+    clientId: 'client-iso',
+    title: 'isolated'
+  });
+  messageRepoA.appendMessage({
+    id: 'msg-isolated',
+    conversationId: 'conv-isolated',
+    role: 'user',
+    content: 'hello'
+  });
+
+  const fromRepoBConversations = conversationRepoB.listConversationsByClient('client-iso', 20);
+  const fromRepoBMessages = messageRepoB.listMessages('conv-isolated', 20);
+
+  assert.equal(fromRepoBConversations.items.length, 0);
+  assert.equal(fromRepoBMessages.items.length, 0);
+});

@@ -27,8 +27,6 @@ export interface KVNamespace {
   put(key: string, value: string): void;
 }
 
-const defaultMessagesByConversation = new Map<string, MessageRecord[]>();
-
 function toIso(now?: string): string {
   return now ?? new Date().toISOString();
 }
@@ -54,7 +52,7 @@ function getBucket(store: Map<string, MessageRecord[]>, conversationId: string):
 }
 
 export function createMessageRepo(_deps?: { d1?: D1Database; kv?: KVNamespace }): MessageRepo {
-  const store = defaultMessagesByConversation;
+  const store = new Map<string, MessageRecord[]>();
 
   return {
     appendMessage(input: { id?: string; conversationId: string; role: 'user' | 'assistant'; content: string; now?: string }): MessageRecord {
