@@ -1,5 +1,10 @@
 # Cangjie HarmonyOS AI Chat App Design
 
+## Related Documents
+- Implementation plan: `docs/plans/2026-02-11-cangjie-ai-chat-app-implementation-plan.md`
+- Process log: `docs/process/2026-02-11-project-log.md`
+- Multi-session protocol: `docs/process/2026-02-11-multi-session-coordination.md`
+
 ## Scope
 - Target: HarmonyOS NEXT mobile app, app-side implemented in pure Cangjie.
 - MVP: internal testing release, no login, chat completion, conversation list, local persistence.
@@ -55,3 +60,4 @@ Reserved compatibility fields/headers:
 - Keep decision log and change history in `docs/process/`.
 - Keep implementation plan in `docs/plans/`.
 - Record each milestone with date, scope, result, and next action.
+- Keep design/plan/process docs cross-linked and updated together.

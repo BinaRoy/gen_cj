@@ -15,6 +15,11 @@
 - MVP scope: minimal chat + conversation list + local persistence
 - Sync strategy: local + cloud
 
+## Change Log
+- 2026-02-11: created multi-session coordination protocol (`docs/process/2026-02-11-multi-session-coordination.md`).
+- 2026-02-11: bootstrapped app/backend contract docs (`app/README.md`, `backend/README.md`).
+- 2026-02-11: aligned documentation cross-links among design/plan/process docs.
+
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
 - Implementation plan: `docs/plans/2026-02-11-cangjie-ai-chat-app-implementation-plan.md`
@@ -31,6 +36,7 @@
 - 2026-02-11: generated design and implementation plan documents.
 - 2026-02-11: initialized git repository on `main` and created initial docs commit `39f0dff`.
 - 2026-02-11: enabled multi-session coordination protocol and review gate.
+- 2026-02-11: verified Task 1 scaffolding file visibility with `rg --files docs app backend`.
 
 ## Next Actions
 1. Start execution in a separate session using `executing-plans`.
