@@ -25,6 +25,7 @@
 - 2026-02-11: migrated Task 1 worktree from `/tmp/gen_cangjie-task1` to `.worktrees/task1-docs-bootstrap`.
 - 2026-02-11: moved `/tmp/gen_cangjie_main_full_listing.txt` to `docs/process/listings/gen_cangjie_main_full_listing.txt`.
 - 2026-02-11: implemented Task 3 OpenAI-backed chat service skeleton with request context middleware and route integration (`backend/src/services`, `backend/src/middlewares/requestContext.ts`, `backend/src/routes/chat.ts`).
+- 2026-02-11: finalized Task 3 on `main` via cherry-pick as `969f6a6` and follow-up fix `b903408` (conflict handled and resolved).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -51,8 +52,9 @@
 - 2026-02-11: Task 3 RED verification `npm test -- backend/test/chat.service.test.ts` failed with missing service module before implementation.
 - 2026-02-11: Task 3 GREEN verification `npm test -- backend/test/chat.service.test.ts` passed after service/route implementation.
 - 2026-02-11: regression verification `npm test -- backend/test/routes.contract.test.ts` passed after chat route integration update.
+- 2026-02-11: reviewer re-verified on `main` with `npm test -- backend/test/chat.service.test.ts` and `npm test -- backend/test/routes.contract.test.ts` (both pass).
 
 ## Next Actions
-1. Start Task 3 execution in separate session using `executing-plans`.
+1. Start Task 4 execution in separate session using `executing-plans`.
 2. Enforce sync checkpoint after each task step or commit.
 3. Perform reviewer pass in this session before marking any task completed.
