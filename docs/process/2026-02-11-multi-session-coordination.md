@@ -15,6 +15,8 @@
 - Do not edit files owned by another active task/session.
 - Any new decision must be written to project log before coding continues.
 - No task may be marked done without test evidence and file-level change summary.
+- Active worktrees for this project must be created under repository root `.worktrees/`.
+- Do not create new project worktrees under `/tmp` going forward.
 
 ## Sync Message Template (for every checkpoint)
 - Session ID:
