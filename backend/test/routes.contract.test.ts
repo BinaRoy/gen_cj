@@ -18,8 +18,8 @@ function hasNormalizedErrorShape(body: unknown): body is { code: string; message
     && candidate.request_id.length > 0;
 }
 
-test('POST /v1/chat returns 400 normalized error when message is missing', () => {
-  const result = handleChat({
+test('POST /v1/chat returns 400 normalized error when message is missing', async () => {
+  const result = await handleChat({
     method: 'POST',
     headers: { 'x-client-id': 'client-1' },
     body: {}
@@ -30,8 +30,8 @@ test('POST /v1/chat returns 400 normalized error when message is missing', () =>
   assert.equal((result.body as { code: string }).code, 'invalid_request');
 });
 
-test('POST /v1/chat returns 200 with placeholder success shape', () => {
-  const result = handleChat({
+test('POST /v1/chat returns 200 with placeholder success shape', async () => {
+  const result = await handleChat({
     method: 'POST',
     headers: { 'x-client-id': 'client-1' },
     body: { message: 'hello' }

@@ -24,6 +24,7 @@
 - 2026-02-11: moved Task 2 working path from `/tmp/gen_cangjie-task2` to `.worktrees/task2-backend-contracts` under repo root.
 - 2026-02-11: migrated Task 1 worktree from `/tmp/gen_cangjie-task1` to `.worktrees/task1-docs-bootstrap`.
 - 2026-02-11: moved `/tmp/gen_cangjie_main_full_listing.txt` to `docs/process/listings/gen_cangjie_main_full_listing.txt`.
+- 2026-02-11: implemented Task 3 OpenAI-backed chat service skeleton with request context middleware and route integration (`backend/src/services`, `backend/src/middlewares/requestContext.ts`, `backend/src/routes/chat.ts`).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -47,6 +48,9 @@
 - 2026-02-11: cherry-picked Task 2 commit `0906e84` to main as `9822c80`.
 - 2026-02-11: verified worktree mapping: `task2/backend-contracts` -> `/home/gloria/Cangjie/gen_cangjie/.worktrees/task2-backend-contracts`.
 - 2026-02-11: verified all project worktrees are under repository `.worktrees/` and no `/tmp/gen_cangjie-*` entries remain.
+- 2026-02-11: Task 3 RED verification `npm test -- backend/test/chat.service.test.ts` failed with missing service module before implementation.
+- 2026-02-11: Task 3 GREEN verification `npm test -- backend/test/chat.service.test.ts` passed after service/route implementation.
+- 2026-02-11: regression verification `npm test -- backend/test/routes.contract.test.ts` passed after chat route integration update.
 
 ## Next Actions
 1. Start Task 3 execution in separate session using `executing-plans`.
