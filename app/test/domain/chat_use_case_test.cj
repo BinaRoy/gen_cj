@@ -36,10 +36,27 @@ class ChatUseCaseTest {
         _ = useCase.sendMessage("client-1", "conv-1", "hello")
 
         @Expect(transport.lastRequest.method, "POST")
-        @Expect(transport.lastRequest.endpoint, "/v1/chat")
+        @Expect(transport.lastRequest.endpoint, "https://api.example.dev/v1/chat")
         @Expect(transport.lastRequest.clientId, "client-1")
-        @Expect(transport.lastRequest.body.contains("message=hello"))
-        @Expect(transport.lastRequest.body.contains("conversation_id=conv-1"))
+        @Expect(transport.lastRequest.body, "{\"message\":\"hello\",\"conversation_id\":\"conv-1\"}")
+        @Expect(!transport.lastRequest.body.contains("base_url"))
+    }
+
+    @TestCase
+    func keepSpecialCharsInJsonPayload(): Unit {
+        let transport = RecordingTransport(plannedResponse: ApiResponse(
+            statusCode: 200,
+            requestId: "req1b",
+            conversationId: "conv-special",
+            role: "assistant",
+            content: "ok",
+            message: ""
+        ))
+        let apiClient = ApiClient(baseUrl: "https://api.example.dev", transport: transport)
+        let useCase = ChatUseCase(apiClient: apiClient)
+
+        _ = useCase.sendMessage("client-special", "conv & = 1", "a & b = c d")
+        @Expect(transport.lastRequest.body, "{\"message\":\"a & b = c d\",\"conversation_id\":\"conv & = 1\"}")
     }
 
     @TestCase

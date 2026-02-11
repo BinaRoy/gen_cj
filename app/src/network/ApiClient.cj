@@ -14,8 +14,8 @@ public class ApiClient {
     }
 
     public func buildChatRequest(clientId: String, conversationId: String, message: String): ApiRequest {
-        let payload = "message=${message}&conversation_id=${conversationId}&base_url=${this.baseUrl}"
-        return ApiRequest(endpoint: "/v1/chat", method: "POST", body: payload, clientId: clientId)
+        let payload = "{\"message\":\"${message}\",\"conversation_id\":\"${conversationId}\"}"
+        return ApiRequest(endpoint: "${this.baseUrl}/v1/chat", method: "POST", body: payload, clientId: clientId)
     }
 
     public func postChat(clientId: String, conversationId: String, message: String): ApiResponse {
