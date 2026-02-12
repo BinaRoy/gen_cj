@@ -31,6 +31,12 @@
 - Open risks/blockers:
 - Next planned step:
 
+## Review Handoff (Required in every task feedback)
+- Task commit hash:
+- Modified file list:
+- Exact `cjc --test` command(s):
+- Test summary (TOTAL / PASSED / FAILED):
+
 ## Review Gate (Lead Reviewer Session)
 - Reviewer checks:
   - Scope match with selected task.
