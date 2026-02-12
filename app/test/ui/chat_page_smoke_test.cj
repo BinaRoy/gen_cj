@@ -15,6 +15,18 @@ class EchoChatGateway <: ChatGateway {
     }
 }
 
+class AcceptFeedbackUseCase <: FeedbackUseCase {
+    public func submitFeedback(clientId: String, messageId: String, rating: Int64, comment: String): FeedbackResult {
+        let feedbackRequestId = "feedback-${clientId}-${messageId}-${rating}-${comment.size}"
+        return FeedbackResult(
+            requestId: feedbackRequestId,
+            accepted: true,
+            errorCategory: ChatErrorCategory.none,
+            message: "ok"
+        )
+    }
+}
+
 @Test
 class ChatPageSmokeTest {
     @TestCase
@@ -24,7 +36,9 @@ class ChatPageSmokeTest {
             clientId: "client-task6-1",
             conversationId: "conv-task6-1",
             gateway: EchoChatGateway(),
-            store: store
+            store: store,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
         )
 
         let result = page.sendMessage("hello")
@@ -44,7 +58,9 @@ class ChatPageSmokeTest {
             clientId: "client-task6-2",
             conversationId: "conv-task6-2",
             gateway: EchoChatGateway(),
-            store: firstStore
+            store: firstStore,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
         )
         _ = firstPage.sendMessage("persist me")
 
@@ -53,7 +69,9 @@ class ChatPageSmokeTest {
             clientId: "client-task6-2",
             conversationId: "conv-task6-2",
             gateway: EchoChatGateway(),
-            store: restartedStore
+            store: restartedStore,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
         )
         let rendered = restartedPage.renderTranscript()
 
@@ -69,7 +87,9 @@ class ChatPageSmokeTest {
             clientId: "client-task6-3",
             conversationId: "conv-task6-a",
             gateway: EchoChatGateway(),
-            store: store
+            store: store,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
         )
         _ = pageA.sendMessage("first")
 
@@ -77,7 +97,9 @@ class ChatPageSmokeTest {
             clientId: "client-task6-3",
             conversationId: "conv-task6-b",
             gateway: EchoChatGateway(),
-            store: store
+            store: store,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
         )
         _ = pageB.sendMessage("second")
 
@@ -88,5 +110,54 @@ class ChatPageSmokeTest {
         @Expect(renderedList.contains("assistant: reply:first"))
         @Expect(renderedList.contains("conv-task6-b"))
         @Expect(renderedList.contains("assistant: reply:second"))
+    }
+
+    @TestCase
+    func submitFeedbackShowsConfirmationWithoutLeakingComment(): Unit {
+        let store = LocalStore()
+        let page = ChatPage(
+            clientId: "client-task7-1",
+            conversationId: "conv-task7-1",
+            gateway: EchoChatGateway(),
+            store: store,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
+        )
+        _ = page.sendMessage("hello feedback")
+
+        let feedbackResult = page.submitLastAssistantFeedback(Int64(5), "private-comment")
+
+        @Expect(feedbackResult.accepted)
+        @Expect(page.renderFeedbackStatus(), "feedback_submitted")
+        @Expect(!page.renderFeedbackStatus().contains("private-comment"))
+    }
+
+    @TestCase
+    func debugModeShowsRequestIdOnlyWhenEnabled(): Unit {
+        let store = LocalStore()
+        let normalPage = ChatPage(
+            clientId: "client-task7-2",
+            conversationId: "conv-task7-2",
+            gateway: EchoChatGateway(),
+            store: store,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: false
+        )
+        _ = normalPage.sendMessage("normal")
+        @Expect(normalPage.renderDebugTrace(), "")
+
+        let debugPage = ChatPage(
+            clientId: "client-task7-3",
+            conversationId: "conv-task7-3",
+            gateway: EchoChatGateway(),
+            store: store,
+            feedbackUseCase: AcceptFeedbackUseCase(),
+            debugMode: true
+        )
+        _ = debugPage.sendMessage("debug")
+
+        let trace = debugPage.renderDebugTrace()
+        @Expect(trace.contains("request_id:"))
+        @Expect(trace.contains("req-client-task7-3-conv-task7-3"))
     }
 }

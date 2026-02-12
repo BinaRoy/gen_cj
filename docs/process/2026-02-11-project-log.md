@@ -34,6 +34,8 @@
 - 2026-02-12: cherry-picked Task 5 unicode-safe JSON escaping fix `c704f32` to `main` as `46aeabb`.
 - 2026-02-12: implemented Task 6 pure-Cangjie UI/storage baseline (`app/src/ui/ChatPage.cj`, `app/src/ui/ConversationListPage.cj`, `app/src/storage/LocalStore.cj`) with smoke tests (`app/test/ui/chat_page_smoke_test.cj`).
 - 2026-02-12: finalized Task 6 on `main` via cherry-pick as `fee2c93` and follow-up refactor `190b29d` (instance-scoped local store with injectable backend).
+- 2026-02-12: implemented Task 7 feedback/observability baseline by wiring feedback route request-id context and app feedback/debug trace flow (`backend/src/routes/feedback.ts`, `app/src/domain/ChatUseCase.cj`, `app/src/ui/ChatPage.cj`).
+- 2026-02-12: added Task 7 verification records (`docs/process/2026-02-11-verification-log.md`) and feedback regression tests (`backend/test/feedback.route.test.ts`, `app/test/ui/chat_page_smoke_test.cj`).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -74,8 +76,12 @@
 - 2026-02-12: Task 6 RED verification failed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task6_chat_page_smoke_test && /tmp/task6_chat_page_smoke_test` due to missing `ChatGateway`/`LocalStore`/`ChatPage`/`ConversationListPage`.
 - 2026-02-12: Task 6 GREEN verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task6_chat_page_smoke_test && /tmp/task6_chat_page_smoke_test` (3 passed / 0 failed).
 - 2026-02-12: reviewer re-verified Task 6 on `main` with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task6_chat_page_smoke_test && /tmp/task6_chat_page_smoke_test` (3 passed / 0 failed).
+- 2026-02-12: Task 7 RED verification failed with `npm test -- backend/test/feedback.route.test.ts` before feedback route request-id propagation (`pass 0 / fail 1`).
+- 2026-02-12: Task 7 RED verification failed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task7_app_test && /tmp/task7_app_test` before feedback/debug symbols were added.
+- 2026-02-12: Task 7 GREEN verification passed with `npm test -- backend/test/feedback.route.test.ts` (`pass 1 / fail 0`).
+- 2026-02-12: Task 7 GREEN verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task7_app_test && /tmp/task7_app_test` (5 passed / 0 failed).
 
 ## Next Actions
-1. Start Task 7 execution in separate session using `executing-plans`.
+1. Start Task 7 review session and run reviewer re-verification on `main` before any status change.
 2. Enforce sync checkpoint after each task step or commit.
 3. Preserve reviewer gate before marking Task 7 as completed.

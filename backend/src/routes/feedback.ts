@@ -1,11 +1,12 @@
-import { createRequestId, errorResult, requireClientId, type RouteRequest, type RouteResult } from '../schemas/common.ts';
+import { createRequestContext } from '../middlewares/requestContext.ts';
+import { errorResult, requireClientId, type RouteRequest, type RouteResult } from '../schemas/common.ts';
 
 function isObject(value: unknown): value is Record<string, unknown> {
   return !!value && typeof value === 'object';
 }
 
 export function handleFeedback(request: RouteRequest): RouteResult {
-  const requestId = createRequestId();
+  const requestId = createRequestContext(request).requestId;
 
   if (request.method !== 'POST') {
     return errorResult(405, 'method_not_allowed', 'method not allowed', requestId);
