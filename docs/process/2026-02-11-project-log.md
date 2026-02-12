@@ -31,6 +31,7 @@
 - 2026-02-11: implemented Task 5 pure-Cangjie networking/domain baseline (`app/src/network/ApiClient.cj`, `app/src/domain/ChatUseCase.cj`, `app/src/domain/models/ChatModels.cj`) with domain tests (`app/test/domain/chat_use_case_test.cj`).
 - 2026-02-11: Task 5 review fix replaced string-concatenated payload with JSON body and removed `base_url` from request payload in `ApiClient.cj`.
 - 2026-02-12: finalized Task 5 on `main` via ordered cherry-pick as `e6fad7d` + `85e2d9b` + `4139a46`.
+- 2026-02-12: cherry-picked Task 5 unicode-safe JSON escaping fix `c704f32` to `main` as `46aeabb`.
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -67,6 +68,7 @@
 - 2026-02-11: Task 5 review-fix RED runtime showed 2 failed cases (`buildRequestForPostChat`, `keepSpecialCharsInJsonPayload`) before `ApiClient.cj` payload/endpoint correction.
 - 2026-02-11: Task 5 review-fix GREEN passed after correction with `cjc --test ... -o /tmp/task5_chat_use_case_test` and runtime execution (5 passed / 0 failed).
 - 2026-02-12: reviewer re-verified Task 5 on `main` with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/task5_chat_use_case_test && /tmp/task5_chat_use_case_test` (6 passed / 0 failed).
+- 2026-02-12: reviewer verified Task 5 unicode-safe escape fix on `main` with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/task5_chat_use_case_test && /tmp/task5_chat_use_case_test` (7 passed / 0 failed).
 
 ## Next Actions
 1. Start Task 6 execution in separate session using `executing-plans`.
