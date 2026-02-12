@@ -54,7 +54,7 @@
 - Task 5: completed (reviewed, cherry-picked to `main` as `e6fad7d` + `85e2d9b` + `4139a46` + `46aeabb`)
 - Task 6: completed (reviewed, cherry-picked to `main` as `fee2c93` + `190b29d`)
 - Task 7: completed (reviewed, cherry-picked to `main` as `0c7a8f3` + `f4103c6`)
-- Task 8: pending
+- Task 8: completed (reviewed, cherry-picked to `main` as `b562058`)
 
 ## Escalation Rules
 - If two sessions touch overlapping files: stop both and reassign ownership.

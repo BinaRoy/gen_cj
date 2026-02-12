@@ -39,6 +39,7 @@
 - 2026-02-12: finalized Task 7 on `main` via cherry-pick as `0c7a8f3` with follow-up reminder comment `f4103c6`.
 - 2026-02-12: prepared Task 8 internal release checklist (`docs/release/internal-test-checklist.md`) covering secret governance, smoke tests, rollback procedure, and known limitations.
 - 2026-02-12: updated Task 8 verification records in `docs/process/2026-02-11-verification-log.md` and synchronized this project log with full-command execution evidence.
+- 2026-02-12: finalized Task 8 on `main` via cherry-pick as `b562058` (internal release checklist and verification records).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -90,8 +91,10 @@
 - 2026-02-12: Task 8 full verification command `npm test -- backend/test/persistence.integration.test.ts` passed (tests 1 / pass 1 / fail 0).
 - 2026-02-12: Task 8 full verification command `npm test -- backend/test/feedback.route.test.ts` passed (tests 1 / pass 1 / fail 0).
 - 2026-02-12: Task 8 full verification command `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/domain/chat_use_case_test.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task8_full_app_test && /tmp/task8_full_app_test` passed (TOTAL 12 / PASSED 12 / FAILED 0).
+- 2026-02-12: reviewer re-verified Task 8 on `main` with `npm test -- backend/test/feedback.route.test.ts` (tests 1 / pass 1 / fail 0).
+- 2026-02-12: reviewer re-verified Task 8 on `main` with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/domain/chat_use_case_test.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task8_full_app_test_main && /tmp/task8_full_app_test_main` (TOTAL 12 / PASSED 12 / FAILED 0).
 
 ## Next Actions
-1. Start Task 8 review session and re-verify documentation/test evidence on `main` before any status change.
-2. Enforce sync checkpoint after each task step or commit.
-3. Preserve reviewer gate before marking Task 8 as completed.
+1. Run branch-finishing flow (`finishing-a-development-branch`) to decide merge/tag/release handoff.
+2. Keep verification artifacts and checklist updated for internal test package execution.
+3. Preserve reviewer gate for any post-Task-8 change request.
