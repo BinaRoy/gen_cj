@@ -1,4 +1,4 @@
-package gen_cangjie_app_task5
+package ohos_app_cangjie_entry
 
 import std.collection.ArrayList
 

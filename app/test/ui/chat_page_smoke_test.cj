@@ -1,4 +1,4 @@
-package gen_cangjie_app_task5
+package ohos_app_cangjie_entry
 
 import std.unittest.testmacro.Test
 import std.unittest.testmacro.TestCase
