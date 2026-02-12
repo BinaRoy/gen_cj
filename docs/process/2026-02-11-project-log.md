@@ -33,6 +33,7 @@
 - 2026-02-12: finalized Task 5 on `main` via ordered cherry-pick as `e6fad7d` + `85e2d9b` + `4139a46`.
 - 2026-02-12: cherry-picked Task 5 unicode-safe JSON escaping fix `c704f32` to `main` as `46aeabb`.
 - 2026-02-12: implemented Task 6 pure-Cangjie UI/storage baseline (`app/src/ui/ChatPage.cj`, `app/src/ui/ConversationListPage.cj`, `app/src/storage/LocalStore.cj`) with smoke tests (`app/test/ui/chat_page_smoke_test.cj`).
+- 2026-02-12: finalized Task 6 on `main` via cherry-pick as `fee2c93` and follow-up refactor `190b29d` (instance-scoped local store with injectable backend).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -72,8 +73,9 @@
 - 2026-02-12: reviewer verified Task 5 unicode-safe escape fix on `main` with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/task5_chat_use_case_test && /tmp/task5_chat_use_case_test` (7 passed / 0 failed).
 - 2026-02-12: Task 6 RED verification failed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task6_chat_page_smoke_test && /tmp/task6_chat_page_smoke_test` due to missing `ChatGateway`/`LocalStore`/`ChatPage`/`ConversationListPage`.
 - 2026-02-12: Task 6 GREEN verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task6_chat_page_smoke_test && /tmp/task6_chat_page_smoke_test` (3 passed / 0 failed).
+- 2026-02-12: reviewer re-verified Task 6 on `main` with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/test/ui/chat_page_smoke_test.cj -o /tmp/task6_chat_page_smoke_test && /tmp/task6_chat_page_smoke_test` (3 passed / 0 failed).
 
 ## Next Actions
-1. Start Task 6 review session and run reviewer re-verification on `main` before status change.
+1. Start Task 7 execution in separate session using `executing-plans`.
 2. Enforce sync checkpoint after each task step or commit.
-3. Preserve reviewer gate before marking Task 6 as completed.
+3. Preserve reviewer gate before marking Task 7 as completed.
