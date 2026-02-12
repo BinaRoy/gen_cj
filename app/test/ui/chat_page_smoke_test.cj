@@ -37,21 +37,23 @@ class ChatPageSmokeTest {
     }
 
     @TestCase
-    func appRestartRestoresConversationHistory(): Unit {
-        let store = LocalStore()
+    func appRestartWithSharedBackendRestoresConversationHistory(): Unit {
+        let backend = InMemoryPersistenceBackend()
+        let firstStore = LocalStore(backend: backend)
         let firstPage = ChatPage(
             clientId: "client-task6-2",
             conversationId: "conv-task6-2",
             gateway: EchoChatGateway(),
-            store: store
+            store: firstStore
         )
         _ = firstPage.sendMessage("persist me")
 
+        let restartedStore = LocalStore(backend: backend)
         let restartedPage = ChatPage(
             clientId: "client-task6-2",
             conversationId: "conv-task6-2",
             gateway: EchoChatGateway(),
-            store: store
+            store: restartedStore
         )
         let rendered = restartedPage.renderTranscript()
 

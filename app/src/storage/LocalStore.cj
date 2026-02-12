@@ -14,20 +14,27 @@ private struct StoredMessage {
     }
 }
 
-public class LocalStore {
-    private static let messageLog = ArrayList<StoredMessage>()
-    private static let conversationOrder = ArrayList<String>()
+public interface LocalPersistenceBackend {
+    func appendMessage(conversationId: String, role: String, content: String): Unit
+    func loadMessages(conversationId: String): ArrayList<ChatMessage>
+    func listConversationIds(): ArrayList<String>
+    func loadLastPreview(conversationId: String): String
+}
+
+public class InMemoryPersistenceBackend <: LocalPersistenceBackend {
+    private let messageLog = ArrayList<StoredMessage>()
+    private let conversationOrder = ArrayList<String>()
 
     public init() {}
 
     public func appendMessage(conversationId: String, role: String, content: String): Unit {
         this.ensureConversationExists(conversationId)
-        LocalStore.messageLog.add(StoredMessage(conversationId: conversationId, role: role, content: content))
+        this.messageLog.add(StoredMessage(conversationId: conversationId, role: role, content: content))
     }
 
     public func loadMessages(conversationId: String): ArrayList<ChatMessage> {
         let messages = ArrayList<ChatMessage>()
-        for (stored in LocalStore.messageLog) {
+        for (stored in this.messageLog) {
             if (stored.conversationId == conversationId) {
                 messages.add(ChatMessage(role: stored.role, content: stored.content))
             }
@@ -37,7 +44,7 @@ public class LocalStore {
 
     public func listConversationIds(): ArrayList<String> {
         let result = ArrayList<String>()
-        for (conversationId in LocalStore.conversationOrder) {
+        for (conversationId in this.conversationOrder) {
             result.add(conversationId)
         }
         return result
@@ -45,7 +52,7 @@ public class LocalStore {
 
     public func loadLastPreview(conversationId: String): String {
         var preview = ""
-        for (stored in LocalStore.messageLog) {
+        for (stored in this.messageLog) {
             if (stored.conversationId == conversationId) {
                 preview = "${stored.role}: ${stored.content}"
             }
@@ -55,14 +62,42 @@ public class LocalStore {
 
     private func ensureConversationExists(conversationId: String): Unit {
         var exists = false
-        for (id in LocalStore.conversationOrder) {
+        for (id in this.conversationOrder) {
             if (id == conversationId) {
                 exists = true
             }
         }
 
         if (!exists) {
-            LocalStore.conversationOrder.add(conversationId)
+            this.conversationOrder.add(conversationId)
         }
+    }
+}
+
+public class LocalStore {
+    private let backend: LocalPersistenceBackend
+
+    public init() {
+        this.backend = InMemoryPersistenceBackend()
+    }
+
+    public init(backend!: LocalPersistenceBackend) {
+        this.backend = backend
+    }
+
+    public func appendMessage(conversationId: String, role: String, content: String): Unit {
+        this.backend.appendMessage(conversationId, role, content)
+    }
+
+    public func loadMessages(conversationId: String): ArrayList<ChatMessage> {
+        return this.backend.loadMessages(conversationId)
+    }
+
+    public func listConversationIds(): ArrayList<String> {
+        return this.backend.listConversationIds()
+    }
+
+    public func loadLastPreview(conversationId: String): String {
+        return this.backend.loadLastPreview(conversationId)
     }
 }
