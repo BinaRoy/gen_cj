@@ -90,6 +90,8 @@ public class ChatPage {
             )
         }
 
+        // TODO(task8+): replace lastChatRequestId with persisted assistant message_id
+        // once message-level IDs are available from storage/sync layer.
         let result = this.feedbackUseCase.submitFeedback(this.clientId, this.lastChatRequestId, rating, comment)
         this.lastFeedbackRequestId = result.requestId
         this.lastFeedbackStatus = if (result.accepted) { "feedback_submitted" } else { "feedback_failed" }
