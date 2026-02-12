@@ -77,6 +77,23 @@ class ChatUseCaseTest {
     }
 
     @TestCase
+    func escapeUnicodeQuoteBackslashAndControlCharsInJsonPayload(): Unit {
+        let transport = RecordingTransport(plannedResponse: ApiResponse(
+            statusCode: 200,
+            requestId: "req1d",
+            conversationId: "conv-unicode",
+            role: "assistant",
+            content: "ok",
+            message: ""
+        ))
+        let apiClient = ApiClient(baseUrl: "https://api.example.dev", transport: transport)
+        let useCase = ChatUseCase(apiClient: apiClient)
+
+        _ = useCase.sendMessage("client-unicode", "会\"话\\一", "你\"好\\世\n界")
+        @Expect(transport.lastRequest.body, "{\"message\":\"你\\\"好\\\\世\\n界\",\"conversation_id\":\"会\\\"话\\\\一\"}")
+    }
+
+    @TestCase
     func mapSuccessResponseToDomain(): Unit {
         let transport = RecordingTransport(plannedResponse: ApiResponse(
             statusCode: 200,

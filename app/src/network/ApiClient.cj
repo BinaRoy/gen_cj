@@ -27,22 +27,9 @@ public class ApiClient {
 }
 
 private func escapeJsonString(raw: String): String {
-    let escaped = StringBuilder("")
-    for (b in raw.toArray()) {
-        let current = String.fromUtf8([b])
-        if (current == "\\") {
-            escaped.append("\\\\")
-        } else if (current == "\"") {
-            escaped.append("\\\"")
-        } else if (current == "\n") {
-            escaped.append("\\n")
-        } else if (current == "\r") {
-            escaped.append("\\r")
-        } else if (current == "\t") {
-            escaped.append("\\t")
-        } else {
-            escaped.append(current)
-        }
-    }
-    return escaped.toString()
+    let step1 = raw.replace("\\", "\\\\")
+    let step2 = step1.replace("\"", "\\\"")
+    let step3 = step2.replace("\n", "\\n")
+    let step4 = step3.replace("\r", "\\r")
+    return step4.replace("\t", "\\t")
 }
