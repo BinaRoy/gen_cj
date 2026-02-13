@@ -4,13 +4,15 @@ internal import ohos.arkui.component.*
 internal import ohos.arkui.state_management.*
 import ohos.arkui.state_macro_manage.*
 
-class DemoGateway <: ChatGateway {
-    public func sendMessage(clientId: String, conversationId: String, message: String): ChatResult {
-        return ChatResult(
-            requestId: "req-demo-1",
-            conversationId: conversationId,
-            reply: ChatMessage(role: "assistant", content: "Echo: ${message}"),
-            errorCategory: ChatErrorCategory.none
+class UnconfiguredHttpTransport <: HttpTransport {
+    public func execute(request: ApiRequest): ApiResponse {
+        return ApiResponse(
+            statusCode: 0,
+            requestId: "",
+            conversationId: "",
+            role: "assistant",
+            content: "",
+            message: "http_transport_not_configured"
         )
     }
 }
@@ -24,7 +26,7 @@ class EntryView {
     private let page = ChatPage(
         clientId: "dev-client",
         conversationId: "conv-1",
-        gateway: DemoGateway(),
+        gateway: createDefaultChatGateway("https://api.example.dev", UnconfiguredHttpTransport()),
         store: LocalStore()
     )
 

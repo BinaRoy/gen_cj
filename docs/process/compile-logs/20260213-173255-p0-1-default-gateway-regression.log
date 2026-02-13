@@ -1,0 +1,26 @@
+[CMD-RED] source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/test/ui/default_gateway_factory_test.cj -o /tmp/p0_1_default_gateway_factory_test
+[RESULT-RED] expected compile failure before createDefaultChatGateway existed (recorded earlier in session).
+[CMD-GREEN] source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/src/ui/DefaultGatewayFactory.cj app/test/domain/chat_use_case_test.cj app/test/ui/chat_page_smoke_test.cj app/test/ui/default_gateway_factory_test.cj -o /tmp/p0_1_app_regression && /tmp/p0_1_app_regression
+[?25l[0J7[;r8
+[1F7[9999E8[0J7[;r8[?25h--------------------------------------------------------------------------------------------------
+TP: [33mohos_app_cangjie_entry[0m, time elapsed: 1629641 ns, RESULT:
+    TCS: [33mChatPageSmokeTest[0m, time elapsed: 1153573 ns, RESULT:
+    [[32m PASSED [0m] CASE: sendMessageRenderAssistantReply (270585 ns)
+    [[32m PASSED [0m] CASE: appRestartWithSharedBackendRestoresConversationHistory (41001 ns)
+    [[32m PASSED [0m] CASE: conversationListShowsSavedConversations (72279 ns)
+    [[32m PASSED [0m] CASE: submitFeedbackShowsConfirmationWithoutLeakingComment (275783 ns)
+    [[32m PASSED [0m] CASE: debugModeShowsRequestIdOnlyWhenEnabled (41802 ns)
+    TCS: [33mChatUseCaseTest[0m, time elapsed: 387342 ns, RESULT:
+    [[32m PASSED [0m] CASE: buildRequestForPostChat (29947 ns)
+    [[32m PASSED [0m] CASE: keepSpecialCharsInJsonPayload (27253 ns)
+    [[32m PASSED [0m] CASE: escapeQuoteAndBackslashInJsonPayload (20688 ns)
+    [[32m PASSED [0m] CASE: escapeUnicodeQuoteBackslashAndControlCharsInJsonPayload (18063 ns)
+    [[32m PASSED [0m] CASE: mapSuccessResponseToDomain (49741 ns)
+    [[32m PASSED [0m] CASE: mapRateLimitToDomainErrorCategory (16164 ns)
+    [[32m PASSED [0m] CASE: mapNetworkFailureToDomainErrorCategory (16991 ns)
+    TCS: [33mDefaultGatewayFactoryTest[0m, time elapsed: 65965 ns, RESULT:
+    [[32m PASSED [0m] CASE: gatewayUsesApiClientTransportResponse (26761 ns)
+Summary: TOTAL: 13
+    [32mPASSED[0m: 13, [32mSKIPPED[0m: 0, ERROR: 0
+    [31mFAILED[0m: 0
+--------------------------------------------------------------------------------------------------

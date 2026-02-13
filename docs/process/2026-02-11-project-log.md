@@ -46,6 +46,8 @@
 - 2026-02-13: archived minimal Cangjie compile verification log with exact command/output (`docs/process/compile-logs/20260213-115321-cjc-min-compile-verify.log`).
 - 2026-02-13: synchronized `gen_cj` DevEco工程迁移修复记录回当前仓库，归档 CLI 对齐后成功构建日志 (`docs/process/compile-logs/20260213-151100-gen_cj-hvigor-align-success.log`)。
 - 2026-02-13: established governance framework at `docs/governance/` with global rules, module playbooks, templates, and reference index.
+- 2026-02-13: created P0 real-chat execution flow document (`docs/process/2026-02-13-p0-real-chat-development-flow.md`) for post-Task-8 functional development.
+- 2026-02-13: started P0-1 app real-path wiring by replacing `EntryView` hardcoded demo gateway with default ApiClient-based gateway factory (`app/src/ui/DefaultGatewayFactory.cj`, `app/src/ui/index.cj`).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -104,6 +106,8 @@
 - 2026-02-13: minimal cjc compile verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/20260213-cjc-min-verify && /tmp/20260213-cjc-min-verify` and archived log to `docs/process/compile-logs/20260213-115321-cjc-min-compile-verify.log` (TOTAL 7 / PASSED 7 / FAILED 0).
 - 2026-02-13: CLI/IDE 对齐后在 Windows `hvigorw.bat` 路径成功构建 `Helloworld` 与 `gen_cj`，并修复 `gen_cj` 迁移代码包名/导入问题后复验通过；完整输出归档到 `docs/process/compile-logs/20260213-151100-gen_cj-hvigor-align-success.log`（`BUILD SUCCESSFUL`）。
 - 2026-02-13: verified governance bootstrap files exist and wired `docs/process/2026-02-11-multi-session-coordination.md` to governance root/global-rules.
+- 2026-02-13: P0-1 RED compile failure confirmed for missing `createDefaultChatGateway` in new test `app/test/ui/default_gateway_factory_test.cj` (before implementation).
+- 2026-02-13: P0-1 GREEN regression verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/src/ui/DefaultGatewayFactory.cj app/test/domain/chat_use_case_test.cj app/test/ui/chat_page_smoke_test.cj app/test/ui/default_gateway_factory_test.cj -o /tmp/p0_1_app_regression && /tmp/p0_1_app_regression` (TOTAL 13 / PASSED 13 / FAILED 0), log archived at `docs/process/compile-logs/20260213-173255-p0-1-default-gateway-regression.log`.
 
 ## Next Actions
 1. Keep DevEco `gen_cj` side与当前仓库源码持续双向同步，避免包名与目录漂移。
