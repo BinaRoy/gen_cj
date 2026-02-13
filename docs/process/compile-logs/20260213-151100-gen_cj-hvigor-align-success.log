@@ -1,0 +1,47 @@
+'\\wsl.localhost\Ubuntu\home\gloria\Cangjie\gen_cangjie'
+CMD.EXE was started with the above path as the current directory.
+UNC paths are not supported.  Defaulting to Windows directory.
+> hvigor [32mFinished :entry:clean... after 77 ms [39m
+> hvigor [32mFinished :entry:default@CangjiePreBuild... after 124 ms [39m
+> hvigor [32mDisabled :entry:default@PreBuild... [39m
+> hvigor [32mFinished :entry:default@CreateModuleInfo... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GenerateMetadata... after 5 ms [39m
+> hvigor [32mFinished :entry:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:default@MergeProfile... after 5 ms [39m
+> hvigor [32mFinished :entry:default@CreateBuildProfile... after 3 ms [39m
+> hvigor [32mFinished :entry:default@PreCheckSyscap... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgContextInfo... after 11 ms [39m
+> hvigor [32mFinished :entry:default@ProcessIntegratedHsp... after 1 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@GenerateCangjieResource...  [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:default@MakePackInfo... after 9 ms [39m
+> hvigor [32mFinished :entry:default@SyscapTransform... after 25 ms [39m
+> hvigor [32mFinished :entry:default@ProcessProfile... after 110 ms [39m
+> hvigor [32mFinished :entry:default@ProcessRouterMap... after 6 ms [39m
+> hvigor [32mFinished :entry:default@ProcessShareConfig... after 4 ms [39m
+> hvigor [32mFinished :entry:default@ProcessStartupConfig... after 3 ms [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithNinja... after 2 ms [39m
+> hvigor [32mFinished :entry:default@ProcessResource... after 4 ms [39m
+> hvigor [32mFinished :entry:default@GenerateLoaderJson... after 11 ms [39m
+> hvigor [32mFinished :entry:default@CompileResource... after 532 ms [39m
+> hvigor [32mFinished :entry:default@CompileArkTS... after 13 ms [39m
+> hvigor [32mFinished :entry:default@BuildJS... after 7 ms [39m
+> hvigor [33mWARN: Warning: field 'profile.build.combined' in '.\cjpm.toml' is experimental, it is unstable and has some limitations, please refer to related documentation for more details[39m
+> hvigor [33mWARN: Warning: field 'profile.build.combined' in '.\cjpm.toml' is experimental, it is unstable and has some limitations, please refer to related documentation for more details[39m
+> hvigor [32mFinished :entry:default@CompileCangjie... after 32 s 155 ms [39m
+> hvigor [32mFinished :entry:default@ProcessLibs... after 22 ms [39m
+> hvigor [32mFinished :entry:default@MoveCangjieLibs... after 12 ms [39m
+> hvigor [32mFinished :entry:default@ProcessCangjieLibs... after 3 ms [39m
+> hvigor [32mFinished :entry:default@DoNativeStrip... after 82 ms [39m
+> hvigor [32mFinished :entry:default@AfterCompileCangjie... after 9 ms [39m
+> hvigor [32mFinished :entry:default@CacheNativeLibs... after 7 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgModuleJson... after 4 ms [39m
+> hvigor [32mFinished :entry:default@ProcessCompiledResources... after 1 ms [39m
+> hvigor [32mFinished :entry:default@PackageHap... after 480 ms [39m
+> hvigor [32mFinished :entry:default@PackingCheck... after 6 ms [39m
+> hvigor [33mWARN: Will skip sign 'hos_hap'. No signingConfigs profile is configured in current project.
+             If needed, configure the signingConfigs in D:\DevEvo_Projects\gen_cj\build-profile.json5.[39m
+> hvigor [32mFinished :entry:default@SignHap... after 3 ms [39m
+> hvigor [32mFinished :entry:default@CollectDebugSymbol... after 1 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 40 s 101 ms [39m
