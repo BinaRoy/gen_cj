@@ -45,6 +45,7 @@
 - 2026-02-13: archived full copy-executable command evidence for structure alignment and minimal compile checks (`docs/process/compile-logs/20260213-115321-full-command-evidence.log`).
 - 2026-02-13: archived minimal Cangjie compile verification log with exact command/output (`docs/process/compile-logs/20260213-115321-cjc-min-compile-verify.log`).
 - 2026-02-13: synchronized `gen_cj` DevEco工程迁移修复记录回当前仓库，归档 CLI 对齐后成功构建日志 (`docs/process/compile-logs/20260213-151100-gen_cj-hvigor-align-success.log`)。
+- 2026-02-13: established governance framework at `docs/governance/` with global rules, module playbooks, templates, and reference index.
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -102,6 +103,7 @@
 - 2026-02-13: full command evidence (copy-executable originals + output) archived to `docs/process/compile-logs/20260213-115321-full-command-evidence.log`.
 - 2026-02-13: minimal cjc compile verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/20260213-cjc-min-verify && /tmp/20260213-cjc-min-verify` and archived log to `docs/process/compile-logs/20260213-115321-cjc-min-compile-verify.log` (TOTAL 7 / PASSED 7 / FAILED 0).
 - 2026-02-13: CLI/IDE 对齐后在 Windows `hvigorw.bat` 路径成功构建 `Helloworld` 与 `gen_cj`，并修复 `gen_cj` 迁移代码包名/导入问题后复验通过；完整输出归档到 `docs/process/compile-logs/20260213-151100-gen_cj-hvigor-align-success.log`（`BUILD SUCCESSFUL`）。
+- 2026-02-13: verified governance bootstrap files exist and wired `docs/process/2026-02-11-multi-session-coordination.md` to governance root/global-rules.
 
 ## Next Actions
 1. Keep DevEco `gen_cj` side与当前仓库源码持续双向同步，避免包名与目录漂移。

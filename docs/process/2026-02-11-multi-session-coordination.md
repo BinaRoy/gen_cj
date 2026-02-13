@@ -9,6 +9,8 @@
 - Master plan: `docs/plans/2026-02-11-cangjie-ai-chat-app-implementation-plan.md`
 - Master log: `docs/process/2026-02-11-project-log.md`
 - This protocol: `docs/process/2026-02-11-multi-session-coordination.md`
+- Governance root: `docs/governance/README.md`
+- Global hard rules: `docs/governance/global-rules.md`
 
 ## Session Isolation Rules
 - One task at a time per session from the implementation plan.
