@@ -17,7 +17,7 @@ class DemoGateway <: ChatGateway {
 
 @Entry
 @Component
-class MyView {
+class EntryView {
     @State var inputText: String = ""
     @State var transcript: String = ""
 
@@ -32,7 +32,7 @@ class MyView {
         Column(space: 12) {
             Text("GenCJ Chat").fontSize(24)
 
-            TextInput({ text: this.inputText })
+            TextInput(text: this.inputText)
                 .onChange({ text =>
                     this.inputText = text
                 })

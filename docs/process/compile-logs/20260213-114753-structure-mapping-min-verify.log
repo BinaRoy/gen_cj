@@ -1,0 +1,8 @@
+[PASS] app/src exists
+[PASS] reference entry cangjie root exists
+[PASS] app/src has 7 cj files
+[PASS] mapping checklist generated
+[PASS] migration commands generated
+[PASS] main_ability uses EntryView
+[PASS] app index declares EntryView
+TOTAL=7 PASSED=7 FAILED=0
