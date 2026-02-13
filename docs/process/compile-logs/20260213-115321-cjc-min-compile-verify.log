@@ -1,0 +1,25 @@
+# Minimal CJC Compile Verify
+
+## Exact Command
+```bash
+source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/20260213-cjc-min-verify && /tmp/20260213-cjc-min-verify
+```
+
+## Output
+```text
+[?25l[0J7[;r8
+[1F7[9999E8[0J7[;r8[?25h--------------------------------------------------------------------------------------------------
+TP: [33mohos_app_cangjie_entry[0m, time elapsed: 448964 ns, RESULT:
+    TCS: [33mChatUseCaseTest[0m, time elapsed: 441882 ns, RESULT:
+    [[32m PASSED [0m] CASE: buildRequestForPostChat (156321 ns)
+    [[32m PASSED [0m] CASE: keepSpecialCharsInJsonPayload (9522 ns)
+    [[32m PASSED [0m] CASE: escapeQuoteAndBackslashInJsonPayload (14477 ns)
+    [[32m PASSED [0m] CASE: escapeUnicodeQuoteBackslashAndControlCharsInJsonPayload (10818 ns)
+    [[32m PASSED [0m] CASE: mapSuccessResponseToDomain (10606 ns)
+    [[32m PASSED [0m] CASE: mapRateLimitToDomainErrorCategory (9657 ns)
+    [[32m PASSED [0m] CASE: mapNetworkFailureToDomainErrorCategory (9233 ns)
+Summary: TOTAL: 7
+    [32mPASSED[0m: 7, [32mSKIPPED[0m: 0, ERROR: 0
+    [31mFAILED[0m: 0
+--------------------------------------------------------------------------------------------------
+```

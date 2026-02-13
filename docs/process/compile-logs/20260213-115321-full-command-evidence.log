@@ -1,0 +1,46 @@
+# Full Command Evidence
+
+## Command 1 (Structure Minimal Verify)
+```bash
+bash -lc 'set -u; TOTAL=0; PASSED=0; FAILED=0; check(){ TOTAL=$((TOTAL+1)); desc="$1"; shift; if "$@"; then PASSED=$((PASSED+1)); echo "[PASS] ${desc}"; else FAILED=$((FAILED+1)); echo "[FAIL] ${desc}"; fi; }; check "app/src exists" test -d /home/gloria/Cangjie/gen_cangjie/app/src; check "reference entry cangjie root exists" test -d /mnt/d/DevEvo_Projects/Helloworld/entry/src/main/cangjie; CJ_COUNT=$(find /home/gloria/Cangjie/gen_cangjie/app/src -type f -name "*.cj" | wc -l); check "app/src has 7 cj files" test "$CJ_COUNT" -eq 7; check "mapping checklist generated" test -f /home/gloria/Cangjie/gen_cangjie/docs/process/2026-02-13-current-repo-to-deveco-entry-mapping.md; check "migration commands generated" test -f /home/gloria/Cangjie/gen_cangjie/docs/process/2026-02-13-app-src-to-entry-migration-commands.md; check "main_ability uses EntryView" grep -q "loadContent(\"EntryView\")" /mnt/d/DevEvo_Projects/Helloworld/entry/src/main/cangjie/main_ability.cj; check "app index declares EntryView" grep -q "class EntryView" /home/gloria/Cangjie/gen_cangjie/app/src/ui/index.cj; echo "TOTAL=$TOTAL PASSED=$PASSED FAILED=$FAILED"; test "$FAILED" -eq 0'
+```
+
+## Command 1 Output
+```text
+[PASS] app/src exists
+[PASS] reference entry cangjie root exists
+[PASS] app/src has 7 cj files
+[PASS] mapping checklist generated
+[PASS] migration commands generated
+[PASS] main_ability uses EntryView
+[PASS] app index declares EntryView
+TOTAL=7 PASSED=7 FAILED=0
+```
+
+## Command 2 (Minimal CJC Compile Verify)
+```bash
+source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/test/domain/chat_use_case_test.cj -o /tmp/20260213-cjc-min-verify && /tmp/20260213-cjc-min-verify
+```
+
+## Command 2 Output
+```text
+[?25l[0J7[;r8
+
+
+[3F7[9999E[2F📦 group ohos_app_cangjie_entry      100% [90m[[0m[32m||[0m[32m|||[0m[32m|||[0m[32m|||[0m[32m|||[0m[32m|||[0m[32m|||[0m[90m[0m[90m][0m [32m✓   [0m (00:00:00)
+
+passed: [32m7[0m, failed: 0                 100% [90m[[0m[32m||[0m[32m|||[0m[32m|||[0m[32m|||[0m[32m|||[0m[32m|||[0m[32m|||[0m[90m[0m[90m][0m  7/7 (00:00:00) 8[0J7[;r8[?25h--------------------------------------------------------------------------------------------------
+TP: [33mohos_app_cangjie_entry[0m, time elapsed: 464915 ns, RESULT:
+    TCS: [33mChatUseCaseTest[0m, time elapsed: 457863 ns, RESULT:
+    [[32m PASSED [0m] CASE: buildRequestForPostChat (137218 ns)
+    [[32m PASSED [0m] CASE: keepSpecialCharsInJsonPayload (10015 ns)
+    [[32m PASSED [0m] CASE: escapeQuoteAndBackslashInJsonPayload (26482 ns)
+    [[32m PASSED [0m] CASE: escapeUnicodeQuoteBackslashAndControlCharsInJsonPayload (13925 ns)
+    [[32m PASSED [0m] CASE: mapSuccessResponseToDomain (11177 ns)
+    [[32m PASSED [0m] CASE: mapRateLimitToDomainErrorCategory (10065 ns)
+    [[32m PASSED [0m] CASE: mapNetworkFailureToDomainErrorCategory (10361 ns)
+Summary: TOTAL: 7
+    [32mPASSED[0m: 7, [32mSKIPPED[0m: 0, ERROR: 0
+    [31mFAILED[0m: 0
+--------------------------------------------------------------------------------------------------
+```
