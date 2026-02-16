@@ -55,6 +55,12 @@
 - Step 1: `bash scripts/lint.sh`
 - Step 2: `bash scripts/test.sh`
 
+## Automated Orchestration
+- Workflow: `.github/workflows/agent-orchestrator.yml`
+- Runtime docs: `docs/pipeline/agent-orchestrator.md`
+- Local command:
+  - `TASK_ID=EX1-P0-1 MAX_ITERS=3 AUTO_RELEASE=false bash scripts/agent/orchestrate.sh`
+
 ## Working Rules
 - No role edits outside its ownership unless task explicitly says so.
 - No task completion claim without command evidence.

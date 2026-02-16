@@ -1,0 +1,64 @@
+name: agent-orchestrator
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_id:
+        description: "Task id from docs/tasks.md"
+        required: true
+        default: "EX1-P0-1"
+        type: string
+      max_iterations:
+        description: "Max implementer->qa->reviewer loops"
+        required: true
+        default: "3"
+        type: string
+      auto_release:
+        description: "Run release role after reviewer pass"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  orchestrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ensure scripts executable
+        run: chmod +x scripts/*.sh scripts/agent/*.sh
+
+      - name: Run role orchestrator
+        env:
+          TASK_ID: ${{ inputs.task_id }}
+          MAX_ITERS: ${{ inputs.max_iterations }}
+          AUTO_RELEASE: ${{ inputs.auto_release }}
+          AGENT_PLANNER_CMD: ${{ secrets.AGENT_PLANNER_CMD }}
+          AGENT_IMPLEMENTER_CMD: ${{ secrets.AGENT_IMPLEMENTER_CMD }}
+          AGENT_QA_CMD: ${{ secrets.AGENT_QA_CMD }}
+          AGENT_REVIEWER_CMD: ${{ secrets.AGENT_REVIEWER_CMD }}
+          AGENT_RELEASE_CMD: ${{ secrets.AGENT_RELEASE_CMD }}
+          AUTO_PUSH_TAG: "false"
+        run: bash scripts/agent/orchestrate.sh
+
+      - name: Upload orchestrator artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: agent-run-${{ inputs.task_id }}
+          path: artifacts/agent-runs/
