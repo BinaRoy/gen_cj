@@ -47,6 +47,7 @@ bash scripts/lint.sh
 - Task board: `docs/tasks.md`
 - Decisions (ADR): `docs/decisions/`
 - Pipeline contract: `docs/pipeline/multi-role-pipeline.md`
+- Auto orchestrator: `docs/pipeline/agent-orchestrator.md`
 - Governance rules: `docs/governance/README.md`
 
 ## FAQ

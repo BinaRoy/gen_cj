@@ -51,6 +51,7 @@
 - 2026-02-16: added single-repo multi-role collaboration scaffold (`README.md`, `.env.example`, `.gitignore`, `scripts/dev.sh`, `scripts/test.sh`, `docs/plan.md`, `docs/tasks.md`, `docs/decisions/ADR-0001-collaboration-interface.md`, `.github/workflows/ci.yml`, `artifacts/README.md`).
 - 2026-02-16: upgraded collaboration model to a multi-role pipeline with explicit role contracts and handoff template (`docs/pipeline/multi-role-pipeline.md`, `docs/pipeline/role-handoff-template.md`).
 - 2026-02-16: added repository lint entrypoint (`scripts/lint.sh`) and updated CI to two-stage gate (lint + smoke test).
+- 2026-02-16: landed automated role orchestrator baseline (`scripts/agent/*`, `.github/workflows/agent-orchestrator.yml`, `docs/pipeline/agent-orchestrator.md`) to run Planner -> Implementer -> QA -> Reviewer -> optional Release with retry loops.
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -113,6 +114,7 @@
 - 2026-02-13: P0-1 GREEN regression verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/src/ui/DefaultGatewayFactory.cj app/test/domain/chat_use_case_test.cj app/test/ui/chat_page_smoke_test.cj app/test/ui/default_gateway_factory_test.cj -o /tmp/p0_1_app_regression && /tmp/p0_1_app_regression` (TOTAL 13 / PASSED 13 / FAILED 0), log archived at `docs/process/compile-logs/20260213-173255-p0-1-default-gateway-regression.log`.
 - 2026-02-16: collaboration scaffold verification passed with `bash scripts/dev.sh` (backend contract smoke pass 6/6) and `bash scripts/test.sh` (backend tests pass 4/4 files; Cangjie suite TOTAL 14 / PASSED 14 / FAILED 0).
 - 2026-02-16: multi-role pipeline verification passed with `bash scripts/lint.sh` and `bash scripts/test.sh` (TOTAL 14 / PASSED 14 / FAILED 0).
+- 2026-02-16: agent-orchestrator local dry-run passed with `TASK_ID=EX1-P0-1 MAX_ITERS=1 AUTO_RELEASE=false bash scripts/agent/orchestrate.sh` (planner/implementer/qa/reviewer all pass in one iteration; qa suite TOTAL 14 / PASSED 14 / FAILED 0).
 
 ## Next Actions
 1. Keep DevEco `gen_cj` side与当前仓库源码持续双向同步，避免包名与目录漂移。
