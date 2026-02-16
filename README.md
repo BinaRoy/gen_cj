@@ -36,11 +36,17 @@ Run unified test script (backend + optional Cangjie test detection):
 bash scripts/test.sh
 ```
 
+Run repository lint checks:
+```bash
+bash scripts/lint.sh
+```
+
 ## Multi-Role Collaboration Entry
 
 - Plan and scope: `docs/plan.md`
 - Task board: `docs/tasks.md`
 - Decisions (ADR): `docs/decisions/`
+- Pipeline contract: `docs/pipeline/multi-role-pipeline.md`
 - Governance rules: `docs/governance/README.md`
 
 ## FAQ

@@ -24,3 +24,9 @@ P0 real chat loop:
 - Tasks: `docs/tasks.md`
 - Decisions: `docs/decisions/`
 - Governance: `docs/governance/README.md`
+- Pipeline: `docs/pipeline/multi-role-pipeline.md`
+
+## First Phase Delivery Gate
+- Lint/format gate: `bash scripts/lint.sh`
+- Smoke test gate: `bash scripts/test.sh`
+- Reviewer gate: blocking/non-blocking checklist with pass/fail decision

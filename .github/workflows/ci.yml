@@ -5,7 +5,7 @@ on:
   pull_request:
 
 jobs:
-  backend-and-app-smoke:
+  lint-and-smoke:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,5 +15,7 @@ jobs:
           cache: "npm"
       - name: Install deps
         run: npm ci
-      - name: Backend tests
-        run: npm test
+      - name: Lint
+        run: bash scripts/lint.sh
+      - name: Smoke Test
+        run: bash scripts/test.sh
