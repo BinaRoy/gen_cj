@@ -1,5 +1,6 @@
 export interface ChatRequestBody {
   message: string;
+  conversation_id?: string;
   model?: string;
   temperature?: number;
   stream?: boolean;
@@ -37,10 +38,15 @@ export function validateChatRequestBody(body: unknown): ValidationResult | Valid
     return { ok: false, message: 'model must be a string' };
   }
 
+  if ('conversation_id' in candidate && typeof candidate.conversation_id !== 'string') {
+    return { ok: false, message: 'conversation_id must be a string' };
+  }
+
   return {
     ok: true,
     value: {
       message: candidate.message,
+      conversation_id: typeof candidate.conversation_id === 'string' ? candidate.conversation_id : undefined,
       model: typeof candidate.model === 'string' ? candidate.model : undefined,
       temperature: typeof candidate.temperature === 'number' ? candidate.temperature : undefined,
       stream: typeof candidate.stream === 'boolean' ? candidate.stream : undefined

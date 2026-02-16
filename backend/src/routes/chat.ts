@@ -1,5 +1,5 @@
 import { createRequestContext } from '../middlewares/requestContext.ts';
-import { errorResult, requireClientId, type RouteRequest, type RouteResult } from '../schemas/common.ts';
+import { errorResult, getHeader, requireClientId, type RouteRequest, type RouteResult } from '../schemas/common.ts';
 import { validateChatRequestBody } from '../schemas/chat.ts';
 import { ChatServiceError, createChatService, type ChatService } from '../services/chatService.ts';
 import { createOpenAIClient } from '../services/openaiClient.ts';
@@ -27,10 +27,13 @@ export async function handleChat(request: RouteRequest, deps?: ChatRouteDeps): P
   if (!validated.ok) {
     return errorResult(400, 'invalid_request', validated.message, requestId);
   }
+  const clientId = getHeader(request.headers, 'x-client-id');
 
   try {
     const result = await chatService.generateReply({
       message: validated.value.message,
+      clientId,
+      conversationId: validated.value.conversation_id,
       model: validated.value.model,
       temperature: validated.value.temperature,
       requestId
@@ -40,7 +43,7 @@ export async function handleChat(request: RouteRequest, deps?: ChatRouteDeps): P
       status: 200,
       body: {
         request_id: requestId,
-        conversation_id: 'conv_placeholder',
+        conversation_id: result.conversationId,
         reply: result.reply
       }
     };

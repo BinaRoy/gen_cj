@@ -54,6 +54,7 @@ test('POST /v1/chat returns 200 with success shape', async () => {
   assert.equal(result.status, 200);
   assert.equal(typeof (result.body as Record<string, unknown>).request_id, 'string');
   assert.equal(typeof (result.body as Record<string, unknown>).conversation_id, 'string');
+  assert.notEqual((result.body as { conversation_id: string }).conversation_id, 'conv_placeholder');
   assert.equal(typeof (result.body as Record<string, unknown>).reply, 'object');
 });
 

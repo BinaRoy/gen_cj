@@ -108,3 +108,44 @@ test('chat route returns normalized 503 provider_error when transport is not con
   assert.equal((response.body as { code: string }).code, 'provider_error');
   assert.equal((response.body as { request_id: string }).request_id, REQUEST_ID);
 });
+
+test('chat route forwards request conversation_id and client header to service', async () => {
+  let captured: { clientId?: string; conversationId?: string } | null = null;
+
+  const response = await handleChat({
+    method: 'POST',
+    headers: {
+      'x-client-id': 'client-2',
+      'x-request-id': REQUEST_ID
+    },
+    body: {
+      message: 'hello',
+      conversation_id: 'conv-track-1'
+    }
+  }, {
+    chatService: {
+      async generateReply(request) {
+        captured = {
+          clientId: request.clientId,
+          conversationId: request.conversationId
+        };
+        return {
+          requestId: request.requestId,
+          conversationId: request.conversationId ?? 'conv-generated',
+          reply: {
+            id: 'cmpl-track-1',
+            role: 'assistant',
+            content: 'tracked'
+          }
+        };
+      }
+    }
+  });
+
+  assert.equal(response.status, 200);
+  assert.deepEqual(captured, {
+    clientId: 'client-2',
+    conversationId: 'conv-track-1'
+  });
+  assert.equal((response.body as { conversation_id: string }).conversation_id, 'conv-track-1');
+});
