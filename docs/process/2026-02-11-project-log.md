@@ -48,6 +48,7 @@
 - 2026-02-13: established governance framework at `docs/governance/` with global rules, module playbooks, templates, and reference index.
 - 2026-02-13: created P0 real-chat execution flow document (`docs/process/2026-02-13-p0-real-chat-development-flow.md`) for post-Task-8 functional development.
 - 2026-02-13: started P0-1 app real-path wiring by replacing `EntryView` hardcoded demo gateway with default ApiClient-based gateway factory (`app/src/ui/DefaultGatewayFactory.cj`, `app/src/ui/index.cj`).
+- 2026-02-16: added single-repo multi-role collaboration scaffold (`README.md`, `.env.example`, `.gitignore`, `scripts/dev.sh`, `scripts/test.sh`, `docs/plan.md`, `docs/tasks.md`, `docs/decisions/ADR-0001-collaboration-interface.md`, `.github/workflows/ci.yml`, `artifacts/README.md`).
 
 ## Documentation Index
 - Design: `docs/plans/2026-02-11-cangjie-ai-chat-app-design.md`
@@ -108,6 +109,7 @@
 - 2026-02-13: verified governance bootstrap files exist and wired `docs/process/2026-02-11-multi-session-coordination.md` to governance root/global-rules.
 - 2026-02-13: P0-1 RED compile failure confirmed for missing `createDefaultChatGateway` in new test `app/test/ui/default_gateway_factory_test.cj` (before implementation).
 - 2026-02-13: P0-1 GREEN regression verification passed with `source /usr/local/bin/cangjie/envsetup.sh && cjc --test app/src/domain/models/ChatModels.cj app/src/network/ApiClient.cj app/src/domain/ChatUseCase.cj app/src/storage/LocalStore.cj app/src/ui/ChatPage.cj app/src/ui/ConversationListPage.cj app/src/ui/DefaultGatewayFactory.cj app/test/domain/chat_use_case_test.cj app/test/ui/chat_page_smoke_test.cj app/test/ui/default_gateway_factory_test.cj -o /tmp/p0_1_app_regression && /tmp/p0_1_app_regression` (TOTAL 13 / PASSED 13 / FAILED 0), log archived at `docs/process/compile-logs/20260213-173255-p0-1-default-gateway-regression.log`.
+- 2026-02-16: collaboration scaffold verification passed with `bash scripts/dev.sh` (backend contract smoke pass 6/6) and `bash scripts/test.sh` (backend tests pass 4/4 files; Cangjie suite TOTAL 14 / PASSED 14 / FAILED 0).
 
 ## Next Actions
 1. Keep DevEco `gen_cj` side与当前仓库源码持续双向同步，避免包名与目录漂移。

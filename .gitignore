@@ -1,2 +1,35 @@
 node_modules/
 .worktrees/
+
+# local env and secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+
+# IDE/system
+.DS_Store
+.idea/
+.vscode/
+.hvigor/
+.agents/
+
+# build and cache
+dist/
+build/
+coverage/
+.cache/
+*.tsbuildinfo
+
+# logs and artifacts
+*.log
+logs/
+artifacts/*
+!artifacts/README.md
+docs/process/compile-logs/*.log
+docs/process/compile-logs/*.txt
+docs/process/compile-logs/*.md
