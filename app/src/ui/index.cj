@@ -4,19 +4,6 @@ internal import ohos.arkui.component.*
 internal import ohos.arkui.state_management.*
 import ohos.arkui.state_macro_manage.*
 
-class UnconfiguredHttpTransport <: HttpTransport {
-    public func execute(request: ApiRequest): ApiResponse {
-        return ApiResponse(
-            statusCode: 0,
-            requestId: "",
-            conversationId: "",
-            role: "assistant",
-            content: "",
-            message: "http_transport_not_configured"
-        )
-    }
-}
-
 @Entry
 @Component
 class EntryView {
@@ -26,7 +13,7 @@ class EntryView {
     private let page = ChatPage(
         clientId: "dev-client",
         conversationId: "conv-1",
-        gateway: createDefaultChatGateway("https://api.example.dev", UnconfiguredHttpTransport()),
+        gateway: createEntryViewDefaultGateway(LoopbackHttpTransport()),
         store: LocalStore()
     )
 

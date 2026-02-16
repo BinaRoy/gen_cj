@@ -38,4 +38,13 @@ class DefaultGatewayFactoryTest {
         @Expect(result.reply.content, "from-real-transport")
         @Expect(result.errorCategory.toString(), "none")
     }
+
+    @TestCase
+    func entryViewDefaultChainUsesRealTransportReply(): Unit {
+        let gateway = createEntryViewDefaultGateway(LoopbackHttpTransport())
+        let result = gateway.sendMessage("client-entry-1", "conv-entry-1", "hello-entry")
+
+        @Expect(result.reply.content, "transport-live-reply")
+        @Expect(result.errorCategory.toString(), "none")
+    }
 }
